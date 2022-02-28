@@ -2,25 +2,15 @@ const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
-
 // get all products
 router.get('/', async (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   try {
-    const getAllProduct = await Product.findall({
-      attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
-      include: [
-        {
-          model: Tag,
-          attributes: ['id', 'tag_name'],
-          through: "ProductTag",
-        },
-        {
-          model: Category,
-          attributes: ['id', 'category_name'],
-        }
-      ],
+    const getAllProduct = await Product.findAll({
+      include: [Category,
+        {model: Tag, through: ProductTag },
+      ]
     });
     res.status(200).json(getAllProduct);
   } catch (err) {
@@ -36,13 +26,11 @@ router.get('/:id', async (req, res) => {
     Product.findByPk(req.params.id, {
       include: [
         {
-          model: Tag,
-          attributes: ['id', 'tag_name'],
-          through: "ProductTag",
+          Tag,
+          through: ProductTag,
         },
         {
-          model: Category,
-          attributes: ['id', 'category_name'],
+          Category
         }
       ]
     })
@@ -53,7 +41,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -85,7 +73,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -126,7 +114,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
   try {
     const deleteProduct = await Product.destroy({
