@@ -16,6 +16,8 @@
 
 [Screenshot](#screenshot)
 
+[Demo](#demo)
+
 [Contributors](#contributors)
 
 ## Description
@@ -41,7 +43,6 @@ This application was made using JavaScript, MySQL, Node JS, Express.JS API and N
 
   You can install the above required packages by entering following on the terminal/node:
   ```
-    npm init -y 
     npm install
   ```
 ## Usage
@@ -88,6 +89,12 @@ However, please feel free to add the feature to contribute to this project or co
 ![screenshot](./Assets/screenshot3.png)
 ![screenshot](./Assets/screenshot4.png)
 
+## Demo 
+Demo Video is divided into 2 Parts: 
+
+Demo: Visual Studio Guide [here](https://youtu.be/qgiMm5A8d34)
+
+Demo: Insomnia Guide [here](https://youtu.be/fRAtjuBpgtM)
 ## Contribution
 
     Joe Lee 2022
